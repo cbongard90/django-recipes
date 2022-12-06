@@ -1,6 +1,7 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from .models import Recipe
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse, Http404
+
+from .models import Recipe, Ingredient, Review
 
 # Create your views here.
 def index(request):
@@ -11,5 +12,6 @@ def index(request):
     return render(request, 'index.html', context)
 
 
-def recipe_detail(request, id):
-    return HttpResponse("You're looking at the recipe %s." %id)
+def recipe_detail(request, recipe_id):
+    recipe = get_object_or_404(Recipe, pk=recipe_id)
+    return render(request, 'recipe_detail.html', {'recipe': recipe})
