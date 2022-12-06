@@ -6,8 +6,14 @@ class Recipe(models.Model):
     instructions = models.TextField(blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.name
+
 class Ingredient(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     name = models.CharField(max_length=220)
     quantity = models.CharField(max_length=50) 
     unit = models.CharField(max_length=50) 
+
+    def __str__(self):
+       return self.name
