@@ -4,6 +4,9 @@ class Recipe(models.Model):
     name = models.CharField(max_length=220)
     description = models.TextField(blank=True, null=True)
     instructions = models.TextField(blank=True, null=True)
+    prep_time = models.CharField(max_length=50, blank=True, null=True)
+    cook_time = models.CharField(max_length=50, blank=True, null=True)
+    photo = models.ImageField(upload_to='recipe_photos', blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
