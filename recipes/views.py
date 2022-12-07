@@ -1,7 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, Http404
 
 from .models import Recipe, Ingredient, Review
+from .forms import RecipeForm
 
 # Create your views here.
 def index(request):
@@ -31,22 +32,11 @@ def add_review(request, recipe_id):
         return render(request, 'recipes/recipe_detail.html', {'recipe': recipe})
 
 def new_recipe(request):
-    context = {}
-
-    return render(request, 'recipes/new_recipe.html', context)
-
-def create_recipe(request):
-    recipe = Recipe.objects.create(
-        name=request.POST['name'],
-        description=request.POST['description'],
-        instructions=request.POST['instructions'],
-        cook_time=request.POST['cook_time'],
-        servings=request.POST['servings'],
-        source=request.POST['source'],
-        source_url=request.POST['source_url'],
-        image_url=request.POST['image_url']
-    )
-    for ingredient in request.POST.getlist('ingredients'):
-        Ingredient.objects.create(recipe=recipe, name=ingredient)
-
-    return render(request, 'recipes/recipe_detail.html', {'recipe': recipe})
+    if request.method == 'POST':
+        form = RecipeForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('recipes:index')
+    else:
+        form = RecipeForm()
+    return render(request, 'recipes/new_recipe.html', {'form': form})
