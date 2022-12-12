@@ -14,12 +14,11 @@ class Recipe(models.Model):
 
 class Ingredient(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-    name = models.CharField(max_length=220)
+    ingredientName = models.CharField(max_length=220)
     quantity = models.CharField(max_length=50)
-    unit = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.name
+        return self.ingredientName
 
 class Review(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
