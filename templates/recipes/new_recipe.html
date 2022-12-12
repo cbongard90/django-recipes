@@ -7,8 +7,11 @@
 <form method="post" enctype="multipart/form-data">
   {% csrf_token %}
 
-  {{ form.as_p }}
-
+  {{ formRecipe.as_p }}
+  <h2>Add Ingredients</h2>
+  {{ formIngredient }}
+  <br>
+  <br>
   <input type="submit" value="Submit">
 </form>
 

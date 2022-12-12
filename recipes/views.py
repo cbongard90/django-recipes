@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, Http404
+from django.views.decorators import csrf
 
 from .models import Recipe, Ingredient, Review
-from .forms import RecipeForm
+from .forms import RecipeForm, IngredientForm
 
 # Create your views here.
 def index(request):
@@ -33,10 +34,19 @@ def add_review(request, recipe_id):
 
 def new_recipe(request):
     if request.method == 'POST':
-        form = RecipeForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
+        formRecipe = RecipeForm(request.POST, request.FILES)
+        formIngredient = IngredientForm(request.POST)
+
+        if formRecipe.is_valid() and formIngredient.is_valid():
+            recipe = formRecipe.save()
+            ingredient = formIngredient.save(False)
+            ingredient.recipe = recipe
+            ingredient.save()
             return redirect('recipes:index')
     else:
-        form = RecipeForm()
-    return render(request, 'recipes/new_recipe.html', {'form': form})
+        formRecipe = RecipeForm()
+        formIngredient = IngredientForm()
+    args = {}
+    args['formRecipe'] = formRecipe
+    args['formIngredient'] = formIngredient
+    return render(request, 'recipes/new_recipe.html', args)
