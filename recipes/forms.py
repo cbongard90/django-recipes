@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import formset_factory
 from .models import Recipe, Ingredient
 
 class RecipeForm(forms.ModelForm):
@@ -13,3 +14,5 @@ class IngredientForm(forms.ModelForm):
         labels = {
             'ingredientName': 'Name',
         }
+
+ingredientFormSet = formset_factory(IngredientForm, extra=1)

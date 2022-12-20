@@ -1,18 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="container">
+  <h1>Add a new recipe</h1>
 
-<h1>Add a new recipe</h1>
+  <form id="form-container" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
 
-<form method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-
-  {{ formRecipe.as_p }}
-  <h2>Add Ingredients</h2>
-  {{ formIngredient }}
-  <br>
-  <br>
-  <input type="submit" value="Submit">
-</form>
+    {{ formRecipe.as_p }}
+    <h2>Add Ingredients</h2>
+    {{ formset.management_form }}
+    <ul class="ingredient-form">
+      {% for form in formset %}
+      <li>
+        {{ form }}
+      </li>
+      {% endfor %}
+    </ul>
+    <button id="add-form" type="button">Add Another Ingredient</button>
+    <br>
+    <br>
+    <input type="submit" value="Submit">
+  </form>
+</div>
 
 {% endblock %}
