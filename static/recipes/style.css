@@ -20,7 +20,7 @@ body {
   font-size: 25px;
   padding: 0 0 0 35px;
  }
- 
+
  li {
   padding: 0 0 30px 0;
  }
@@ -34,7 +34,7 @@ body {
   color: rgb(230, 169, 37);
  }
 
- button {
+ button#add-recipe {
   border-radius: 0 45px 45px 45px;
   background: rgb(230, 169, 37);
   border: none;
@@ -68,7 +68,7 @@ input{
   border-radius: 16px;
   box-shadow: inset 5px 5px 5px #cbced1, inset -5px -5px 5px #ffffff;
   height: 30px;
-} 
+}
 
 #id_photo {
   border-radius: 0% !important;
@@ -90,4 +90,9 @@ textarea {
 p {
   font-family: 'Caveat', cursive; ;
   font-size: 20px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
 }
