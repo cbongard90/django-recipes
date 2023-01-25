@@ -47,7 +47,7 @@ body {
   font-size: 30px;
  }
 
- img {
+ img.recipe-image {
   width: 150px;
   height: 150px;
   border-radius: 50%;
@@ -95,4 +95,12 @@ p {
 .container {
   max-width: 700px;
   margin: 0 auto;
+}
+
+#recipe {
+  width: 500px;
+  height: 300px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 20px;
 }
