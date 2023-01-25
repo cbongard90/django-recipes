@@ -7,7 +7,7 @@
 {% if recipe_list %}
     <ul>
     {% for recipe in recipe_list %}
-        <li><img src="{{recipe.photo.url}}" alt="{{ recipe.name }}"><div id="text"><a href="/recipe/{{ recipe.id }}/">{{ recipe.name }}</a></div></li>
+        <li><img class="recipe-image" src="{{recipe.photo.url}}" alt="{{ recipe.name }}"><div id="text"><a href="/recipe/{{ recipe.id }}/">{{ recipe.name }}</a></div></li>
     {% endfor %}
     </ul>
 {% else %}
